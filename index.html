@@ -286,6 +286,11 @@ details.run .body{padding:0 18px 18px}
     <div class="note" style="margin:12px 0 0"><b>What to collect.</b> Only station 6, on paper. Everything else is
     practice and marking it would turn a working session into a test. If you want a quick temperature check, ask each
     pair to call out how many breaks they found at station 5 — it tells you instantly who is testing properly.</div>
+    <div class="note win" style="margin:12px 0 0"><b>Nobody gets stranded.</b> Stations 1 and 3 have a three-step
+    hint ladder and then a <b>Show the answer</b> button — it unlocks after the third hint or after three failed
+    runs, and it keeps their own attempt so they can put it back. Station 2 can place one box at a time or reveal the
+    whole chart. Station 4 fills one trace cell on request. Tell them at the start that pressing these is allowed;
+    otherwise the proud ones sit silently doing nothing for ten minutes, which is the worst outcome available.</div>
     <div class="note real" style="margin:12px 0 0"><b>If the room has no laptops.</b> Stations 1, 2 and 6 work entirely
     on paper straight from this page on the projector. Station 4 works with two notebooks and no computer at all — one
     writes the algorithm, the other traces it, and they argue about who is right. That argument is the lesson.</div>
@@ -303,7 +308,11 @@ details.run .body{padding:0 18px 18px}
 
   <div class="brief"><h4>Rules of the station</h4>
   <p>Work left to right across the three tabs. Do not guess from the title: follow the arrows. When your code passes
-  every test, write it into your notebook before you move on, because you will need it again at station 6.</p></div>
+  every test, write it into your notebook before you move on, because you will need it again at station 6.</p>
+  <p style="margin-top:8px"><b>If you get stuck:</b> press <b>I am stuck</b> for a hint. There are three, and each one
+  gives away a little more. After the third, a button appears that shows the whole answer — and you are allowed to
+  press it. Read it, close it, and then write it again yourself from memory. That is worth far more than sitting
+  looking at a blank screen for ten minutes.</p></div>
 
   <div class="panel">
     <div class="tabs" id="aSel"></div>
@@ -315,6 +324,7 @@ details.run .body{padding:0 18px 18px}
         <div class="btnrow">
           <button class="btn accent" id="aRun">&#9654; Run the tests</button>
           <button class="btn ghost" id="aPeek">I am stuck</button>
+          <button class="btn ghost hide" id="aSol">Show me the answer</button>
           <button class="btn ghost" id="aRe">Clear</button>
         </div>
       </div>
@@ -336,7 +346,10 @@ details.run .body{padding:0 18px 18px}
   <div class="brief"><h4>Rules of the station</h4>
   <p>Drag each statement into the box where it belongs, or tap a statement and then tap a box. Get all of them right,
   then <b>close the laptop and draw the whole chart on paper from memory</b>. Mark your own drawing against the
-  checklist underneath. The drawing is the bit that earns marks in June, not the dragging.</p></div>
+  checklist underneath. The drawing is the bit that earns marks in June, not the dragging.</p>
+  <p style="margin-top:8px"><b>If you get stuck:</b> <b>Place one for me</b> fills a single box and tells you why it
+  goes there. Do that twice and a button appears that shows the whole finished chart — then clear it and rebuild it
+  yourself.</p></div>
 
   <div class="panel">
     <div class="tabs" id="bSel"></div>
@@ -347,6 +360,8 @@ details.run .body{padding:0 18px 18px}
         <div class="pool" id="bPool"></div>
         <div class="btnrow">
           <button class="btn accent" id="bCheck">Check the chart</button>
+          <button class="btn ghost" id="bOne">Place one for me</button>
+          <button class="btn ghost hide" id="bSol">Show the finished chart</button>
           <button class="btn ghost" id="bClear">Clear</button>
         </div>
         <div class="feedback" id="bFb"></div>
@@ -380,7 +395,8 @@ details.run .body{padding:0 18px 18px}
     <div class="ab"><h4><span>A</span> Driver</h4><p>Hands on the keyboard. You may only type what the navigator says.
     If you disagree, say so out loud — do not just silently type the better version.</p></div>
     <div class="ab"><h4><span>B</span> Navigator</h4><p>No touching the keyboard. Decide the variables and the loop
-    <em>before</em> any typing starts, and say which loop you chose and why. Swap roles at each new brief.</p></div>
+    <em>before</em> any typing starts, and say which loop you chose and why. Swap roles at each new brief. <b>Nudge us</b>
+    is yours to call — three hints, then the answer.</p></div>
   </div>
 
   <div class="panel">
@@ -392,6 +408,7 @@ details.run .body{padding:0 18px 18px}
         <div class="btnrow">
           <button class="btn accent" id="cRun">&#9654; Run the tests</button>
           <button class="btn ghost" id="cHint">Nudge us</button>
+          <button class="btn ghost hide" id="cSol">Show us the answer</button>
           <button class="btn ghost" id="cRe">Clear</button>
         </div>
       </div>
@@ -1315,7 +1332,9 @@ var S1=[
          {t:'term',x:'STOP'}],
   start:'START\nDECLARE n\n\nSTOP',
   tests:[{in:[4],want:['EVEN']},{in:[7],want:['ODD']},{in:[0],want:['EVEN']},{in:[-3],want:['ODD']}],
-  peek:'The diamond is an IF. Both branches print something, so you need an ELSE — and the condition in the diamond goes into the IF <em>exactly as written</em>, MOD and all.',
+  hints:['The chart has <b>one diamond</b>, so your code has <b>one IF</b>. Both branches print something, so you need the ELSE as well.',
+         'The condition goes into the IF <em>exactly as it is written in the diamond</em> — <span class="mono">n MOD 2 = 0</span>. MOD gives the remainder, so that line is asking: is there nothing left over when you divide by 2?',
+         'Your skeleton is five lines: <span class="mono">READ n</span>, then <span class="mono">IF n MOD 2 = 0 THEN</span>, a WRITE, <span class="mono">ELSE</span>, a WRITE, <span class="mono">ENDIF</span>. Every word you need is somewhere on the chart.'],
   sol:'START\nDECLARE n\nREAD n\nIF n MOD 2 = 0 THEN\n   WRITE "EVEN"\nELSE\n   WRITE "ODD"\nENDIF\nSTOP'},
  {n:'B · Count the negatives',
   nodes:[{t:'term',x:'START'},{t:'proc',x:'count <- 0'},{t:'proc',x:'i <- 1'},
@@ -1326,7 +1345,9 @@ var S1=[
          {t:'io',x:'WRITE count'},{t:'term',x:'STOP'}],
   start:'START\nDECLARE n, count, i\n\nSTOP',
   tests:[{in:[3,-1,-4,0,9],want:['2']},{in:[1,2,3,4,5],want:['0']},{in:[-1,-2,-3,-4,-5],want:['5']}],
-  peek:'Two things are nested here. The chart draws the counter by hand (<span class="mono">i &lt;- 1</span>, test, <span class="mono">i &lt;- i + 1</span>) — you may write that as a WHILE exactly as drawn, or collapse the whole thing into <span class="mono">FOR i &lt;- 1 TO 5</span>. Both pass. The IF inside has an empty NO branch, so it needs no ELSE.',
+  hints:['Two things are nested here: a loop that runs five times, and a decision inside it. Build the loop first and get it reading five numbers, then put the IF inside it.',
+         'The chart draws the counter by hand — <span class="mono">i &lt;- 1</span>, test <span class="mono">i &lt;= 5</span>, then <span class="mono">i &lt;- i + 1</span>. You may copy that as a WHILE exactly as drawn, or collapse the whole thing into <span class="mono">FOR i &lt;- 1 TO 5</span>. Both pass the tests.',
+         '<span class="mono">count &lt;- 0</span> goes <b>before</b> the loop — that is the one almost everybody puts inside it. And the IF has an empty NO branch, so it needs no ELSE: just <span class="mono">IF n &lt; 0 THEN count &lt;- count + 1 ENDIF</span>.'],
   sol:'START\nDECLARE n, count, i\ncount <- 0\nFOR i <- 1 TO 5\n   READ n\n   IF n < 0 THEN\n      count <- count + 1\n   ENDIF\nENDFOR\nWRITE count\nSTOP'},
  {n:'C · Until zero',
   nodes:[{t:'term',x:'START'},{t:'proc',x:'total <- 0'},{t:'proc',x:'count <- 0'},{t:'io',x:'READ n'},
@@ -1335,25 +1356,71 @@ var S1=[
          {t:'io',x:'WRITE total'},{t:'io',x:'WRITE count'},{t:'term',x:'STOP'}],
   start:'START\nDECLARE n, total, count\n\nSTOP',
   tests:[{in:[4,8,15,0],want:['27','3']},{in:[0],want:['0','0']},{in:[100,0],want:['100','1']}],
-  peek:'Count the READ boxes in the chart. There are two, and they are in different places for a reason. One gets the very first value; the one at the bottom of the loop gets every value after that. Leave the second one out and the loop never ends.',
+  hints:['Count the READ boxes in the chart. There are <b>two</b>, and they are in different places. That is not a mistake.',
+         'The first READ, above the diamond, gets the very first value so the loop has something to test. The READ at the bottom of the loop gets every value after that. Leave that second one out and the loop never ends.',
+         'Skeleton: <span class="mono">total &lt;- 0</span>, <span class="mono">count &lt;- 0</span>, <span class="mono">READ n</span>, <span class="mono">WHILE n &lt;&gt; 0 DO</span> … <span class="mono">ENDWHILE</span>, then two WRITEs. Inside the loop, in order: add n to total, add 1 to count, READ n.'],
   sol:'START\nDECLARE n, total, count\ntotal <- 0\ncount <- 0\nREAD n\nWHILE n <> 0 DO\n   total <- total + n\n   count <- count + 1\n   READ n\nENDWHILE\nWRITE total\nWRITE count\nSTOP'}
 ];
+/* A hint ladder: three nudges, each giving away a little more, then the answer.
+   Nobody should sit staring at a blank screen for ten minutes of a working session. */
+function Ladder(cfg){this.c=cfg;this.step=0;this.fails=0;this.saved=null;this.showing=false;}
+Ladder.prototype.reset=function(){
+  this.step=0;this.fails=0;this.saved=null;this.showing=false;
+  this.c.hintBtn.textContent=this.c.hintLabel;
+  this.c.solBtn.classList.add('hide');
+  this.c.solBtn.textContent=this.c.solLabel;
+};
+Ladder.prototype.offerAnswer=function(){this.c.solBtn.classList.remove('hide');};
+Ladder.prototype.hint=function(){
+  var hs=this.c.hints();
+  if(this.step>=hs.length){
+    this.offerAnswer();
+    say(this.c.fb,'<b>That is every hint there is.</b> Press <b>'+esc(this.c.solLabel)+'</b> \u2014 reading a worked answer and then rebuilding it yourself is a perfectly respectable way to learn this.',true);
+    return;}
+  this.step++;
+  say(this.c.fb,'<b>Hint '+this.step+' of '+hs.length+'.</b> '+hs[this.step-1],true);
+  this.c.hintBtn.textContent=(this.step>=hs.length)?'No hints left':('Another hint ('+this.step+'/'+hs.length+')');
+  if(this.step>=hs.length)this.offerAnswer();
+};
+Ladder.prototype.failed=function(){this.fails++;if(this.fails>=3)this.offerAnswer();};
+Ladder.prototype.toggleAnswer=function(){
+  var ed=this.c.editor;
+  if(this.showing){
+    if(this.saved!=null)ed.value=this.saved;
+    this.showing=false;this.c.solBtn.textContent=this.c.solLabel;
+    say(this.c.fb,'<b>Your own version is back.</b> Now write it again without looking. If you cannot yet, press the button once more \u2014 but read it for the shape, not the letters.',true);
+    return;}
+  this.saved=ed.value;
+  ed.value=this.c.sol();
+  this.showing=true;this.c.solBtn.textContent='Hide it \u2014 let me try again';
+  say(this.c.fb,'<b>One way to do it.</b> Yours may look different and still be right. Read it, press Run so you can watch it work, then press <b>Hide it</b> and write it out yourself from memory. Your own attempt has been kept.',true);
+};
+
 function initS1(){
   var cur=0;
+  var L=new Ladder({fb:$('#aFb'),editor:$('#aEd'),hintBtn:$('#aPeek'),solBtn:$('#aSol'),
+    hintLabel:'I am stuck',solLabel:'Show me the answer',
+    hints:function(){return S1[cur].hints;},sol:function(){return S1[cur].sol;}});
   tabs($('#aSel'),S1.map(function(s){return s.n;}),function(i){
     cur=i;
     $('#aChart').innerHTML=fcSVG(S1[i].nodes);
     $('#aEd').value=S1[i].start;
     $('#aRes').innerHTML='';$('#aFb').className='feedback';
+    L.reset();
   });
-  $('#aRe').addEventListener('click',function(){$('#aEd').value=S1[cur].start;$('#aRes').innerHTML='';$('#aFb').className='feedback';});
-  $('#aPeek').addEventListener('click',function(){say($('#aFb'),'<b>A nudge, not the answer:</b> '+S1[cur].peek,true);});
+  $('#aRe').addEventListener('click',function(){$('#aEd').value=S1[cur].start;$('#aRes').innerHTML='';$('#aFb').className='feedback';L.reset();});
+  $('#aPeek').addEventListener('click',function(){L.hint();});
+  $('#aSol').addEventListener('click',function(){L.toggleAnswer();});
   $('#aRun').addEventListener('click',function(){
     var s=S1[cur],pass=runCases($('#aEd').value,s.tests,$('#aRes'));
     if(pass===s.tests.length){
-      say($('#aFb'),'<b>All '+pass+' tests pass — you read the chart correctly.</b> Copy it into your notebook now, then move to the next tab.',true);
+      say($('#aFb'),'<b>All '+pass+' tests pass \u2014 you read the chart correctly.</b> Copy it into your notebook now, then move to the next tab.',true);
       markTabDone($('#aSel'),cur);
-    }else say($('#aFb'),'<b>'+pass+' of '+s.tests.length+'.</b> Go back to the chart and follow the arrows with the failing input in your head, one box at a time. The chart is never wrong; your reading of it is.',false);
+    }else{
+      L.failed();
+      say($('#aFb'),'<b>'+pass+' of '+s.tests.length+'.</b> Go back to the chart and follow the arrows with the failing input in your head, one box at a time. The chart is never wrong; your reading of it is.'+
+        (L.fails>=3?' There is a <b>Show me the answer</b> button now, if you want it.':' Press <b>I am stuck</b> for a hint.'),false);
+    }
   });
 }
 
@@ -1398,7 +1465,7 @@ var TICKS=[
  'Every line has an arrowhead, and my loop-back arrow returns above the diamond, not below it.'
 ];
 function initS2(){
-  var cur=0,fill={},picked=null;
+  var cur=0,fill={},picked=null,revealed=false,tries=0,hints=0;
   function draw(){
     $('#bChart').innerHTML=fcSVG(S2[cur].nodes,null,null,fill);
     var used={};
@@ -1437,7 +1504,47 @@ function initS2(){
     if(!h)return;e.preventDefault();
     var pi=e.dataTransfer.getData('text/plain');
     if(pi!=='')place(h.getAttribute('data-id'),parseInt(pi,10));});
-  $('#bClear').addEventListener('click',function(){fill={};picked=null;$('#bFb').className='feedback';draw();});
+  $('#bClear').addEventListener('click',function(){fill={};picked=null;revealed=false;tries=0;
+    $('#bSol').classList.add('hide');$('#bFb').className='feedback';draw();});
+  function allSlots(){
+    var out=[];
+    (function walk(ns){ns.forEach(function(n){
+      if(n.t==='slot')out.push(n);
+      if(n.yes)walk(n.yes);if(n.no)walk(n.no);if(n.body)walk(n.body);});})(S2[cur].nodes);
+    return out;
+  }
+  function chipFor(ans){
+    var pool=S2[cur].pool,used={},i;
+    Object.keys(fill).forEach(function(k){used[fill[k].pi]=true;});
+    for(i=0;i<pool.length;i++)if(!used[i]&&pool[i].x===ans)return i;
+    for(i=0;i<pool.length;i++)if(pool[i].x===ans)return i;
+    return -1;
+  }
+  $('#bOne').addEventListener('click',function(){
+    var slots=allSlots(),i,s,pi;
+    for(i=0;i<slots.length;i++){
+      s=slots[i];
+      if(fill[s.id]&&fill[s.id].x===s.ans)continue;
+      pi=chipFor(s.ans);
+      if(pi<0)continue;
+      place(s.id,pi);
+      say($('#bFb'),'<b>Placed one for you.</b> <span class="mono">'+esc(s.ans)+'</span> belongs in that box. Look at where it sits relative to the arrows — that is the clue for the next one.',true);
+      hints++;
+      if(hints>=2)$('#bSol').classList.remove('hide');
+      return;
+    }
+    say($('#bFb'),'Every box already holds the right statement — press <b>Check the chart</b>.',true);
+  });
+  $('#bSol').addEventListener('click',function(){
+    if(revealed){fill={};picked=null;revealed=false;
+      $('#bSol').textContent='Show the finished chart';
+      say($('#bFb'),'<b>Cleared.</b> Build it again from memory — that is the bit that sticks.',true);draw();return;}
+    allSlots().forEach(function(s){var pi=chipFor(s.ans);if(pi>=0)place(s.id,pi);});
+    revealed=true;picked=null;
+    $('#bSol').textContent='Clear it — let me try again';
+    say($('#bFb'),'<b>Here is the finished chart.</b> Study where each shape sits, then press <b>Clear it</b> and build it again yourself. After that, draw it on paper — that is the version that earns marks.',true);
+    draw();
+  });
   $('#bCheck').addEventListener('click',function(){
     var slots=[],right=0,wrong=[],blank=0;
     (function walk(ns){ns.forEach(function(n){
@@ -1448,13 +1555,15 @@ function initS2(){
       if(!f){blank++;return;}
       if(f.x===s.ans)right++;else wrong.push({s:s,f:f});
     });
-    if(blank){say($('#bFb'),'<b>'+blank+' box'+(blank===1?' is':'es are')+' still empty.</b>',false);return;}
+    if(blank){say($('#bFb'),'<b>'+blank+' box'+(blank===1?' is':'es are')+' still empty.</b> If you cannot see where one goes, <b>Place one for me</b> will do a single box and leave the rest to you.',false);return;}
     if(!wrong.length){say($('#bFb'),'<b>All '+right+' in the right place.</b> '+esc(S2[cur].win)+
       '<br><br><b>Now close the laptop and draw the whole thing on paper</b>, then use the checklist below.',true);
       markTabDone($('#bSel'),cur);return;}
+    tries++;
+    if(tries>=2)$('#bSol').classList.remove('hide');
     say($('#bFb'),'<b>'+right+' right, '+wrong.length+' in the wrong box.</b><ul style="margin:8px 0 0;padding-left:20px">'+
       wrong.map(function(w){return '<li><span class="mono">'+esc(w.f.x)+'</span> does not belong there — that box should hold <span class="mono">'+esc(w.s.ans)+'</span>.</li>';}).join('')+
-      '</ul>',false);
+      '</ul>'+(tries>=2?'<br>Drag those across, or press <b>Show the finished chart</b> if you would rather see the whole thing first.':''),false);
   });
   $('#bTicks').innerHTML=TICKS.map(function(t,i){
     return '<label class="tick"><input type="checkbox" data-t="'+i+'"><span>'+t+'</span></label>';}).join('');
@@ -1462,7 +1571,9 @@ function initS2(){
     var l=e.target.closest?e.target.closest('.tick'):null;
     if(l)l.classList.toggle('got',e.target.checked);});
   tabs($('#bSel'),S2.map(function(s){return s.n;}),function(i){
-    cur=i;fill={};picked=null;$('#bFb').className='feedback';
+    cur=i;fill={};picked=null;revealed=false;tries=0;hints=0;
+    $('#bSol').classList.add('hide');$('#bSol').textContent='Show the finished chart';
+    $('#bFb').className='feedback';
     $('#bCode').innerHTML=codeHTML(S2[i].code,-1,null);draw();
   });
 }
@@ -1475,36 +1586,50 @@ var S3=[
   brief:'<h4>Fare for a trip</h4><p>A minibus charges <b>$3.00 per passenger</b> to get in, plus <b>$2.00 per kilometre, per passenger</b>. Read the number of passengers and the distance in kilometres, then print the total fare for the whole trip.</p>',
   start:'START\nDECLARE passengers, km, fare\n\nSTOP',
   tests:[{in:[4,10],want:['92']},{in:[1,0],want:['3']},{in:[2,5],want:['26']},{in:[0,20],want:['0']}],
-  hint:'Work out what <em>one</em> passenger pays first, then multiply. There is no loop here at all — if you started writing one, stop and read the brief again.',
+  hints:['There is <b>no loop here at all</b>. If you have started writing one, stop and read the brief again — two values go in, one value comes out.',
+         'Work out what <em>one</em> passenger pays first: $3 to get in, plus $2 for every kilometre. That is <span class="mono">3 + 2 * km</span>.',
+         'Then multiply by how many of them there are: <span class="mono">fare &lt;- passengers * (3 + 2 * km)</span>. Two READs above that line, one WRITE below it.'],
   sol:'START\nDECLARE passengers, km, fare\nREAD passengers\nREAD km\nfare <- passengers * (3 + 2 * km)\nWRITE "Total fare $", fare\nSTOP'},
  {n:'2 · The over',
   brief:'<h4>Six balls</h4><p>Six balls are bowled in an over. Read the runs scored off each ball, then print <b>the total runs in the over</b> and <b>how many of the six were boundaries</b> (a boundary is a 4 or a 6).</p>',
   start:'START\nDECLARE ball, runs, total, boundaries\n\nSTOP',
   tests:[{in:[1,0,4,2,6,0],want:['13','2']},{in:[0,0,0,0,0,0],want:['0','0']},{in:[4,4,6,6,4,6],want:['30','6']},{in:[1,1,1,1,1,1],want:['6','0']}],
-  hint:'You know it is six before you start, so you know which loop. Two running totals, both set to zero <em>before</em> the loop. The boundary test needs an OR.',
+  hints:['You know it is six balls before you start, so you know which loop it is. A FOR, not a WHILE.',
+         'Two running totals, and <b>both</b> must be set to 0 before the loop starts. Inside the loop you read one ball, add it to the total, and then ask whether that ball was a boundary.',
+         'The boundary test needs an OR: <span class="mono">IF runs = 4 OR runs = 6 THEN boundaries &lt;- boundaries + 1 ENDIF</span>. Print both totals after the ENDFOR.'],
   sol:'START\nDECLARE ball, runs, total, boundaries\ntotal <- 0\nboundaries <- 0\nFOR ball <- 1 TO 6\n   READ runs\n   total <- total + runs\n   IF runs = 4 OR runs = 6 THEN\n      boundaries <- boundaries + 1\n   ENDIF\nENDFOR\nWRITE "Runs:", total\nWRITE "Boundaries:", boundaries\nSTOP'},
  {n:'3 · Troupe registration',
   brief:'<h4>Who goes where</h4><p>People register for a Carnival troupe one at a time. Each entry is an <b>age</b>. Registration stops when someone enters <b>−1</b>. Print how many registrants go in the <b>junior</b> section (under 18) and how many go in the <b>senior</b> section (18 or over). The −1 is not a person and must not be counted.</p>',
   start:'START\nDECLARE age, junior, senior\n\nSTOP',
   tests:[{in:[12,19,8,45,17,-1],want:['3','2']},{in:[-1],want:['0','0']},{in:[18,17,-1],want:['1','1']},{in:[17,17,17,-1],want:['3','0']}],
-  hint:'You do not know how many people will register, so it is a WHILE, not a FOR. Read one age before the loop starts, and read the next one at the <em>bottom</em> of the loop — otherwise the −1 gets counted as a person, or the loop never ends.',
+  hints:['You do not know how many people will register, so this is a <b>WHILE</b>, not a FOR. The −1 is the sentinel — the value that means stop.',
+         'Same two-READ shape as chart C back at station 1: read one age <em>before</em> the loop, and read the next one at the <b>bottom</b> of the loop. Any other arrangement either counts the −1 as a person or never stops.',
+         'Inside the loop: <span class="mono">IF age &lt; 18 THEN junior &lt;- junior + 1 ELSE senior &lt;- senior + 1 ENDIF</span>, and then <span class="mono">READ age</span>. Both counters start at 0 before the loop.'],
   sol:'START\nDECLARE age, junior, senior\njunior <- 0\nsenior <- 0\nREAD age\nWHILE age <> -1 DO\n   IF age < 18 THEN\n      junior <- junior + 1\n   ELSE\n      senior <- senior + 1\n   ENDIF\n   READ age\nENDWHILE\nWRITE "Junior:", junior\nWRITE "Senior:", senior\nSTOP'}
 ];
 function initS3(){
   var cur=0;
+  var L=new Ladder({fb:$('#cFb'),editor:$('#cEd'),hintBtn:$('#cHint'),solBtn:$('#cSol'),
+    hintLabel:'Nudge us',solLabel:'Show us the answer',
+    hints:function(){return S3[cur].hints;},sol:function(){return S3[cur].sol;}});
   tabs($('#cSel'),S3.map(function(s){return s.n;}),function(i){
     cur=i;$('#cBrief').innerHTML=S3[i].brief;$('#cEd').value=S3[i].start;
     $('#cRes').innerHTML='<span style="font-size:.86rem;color:var(--ink3)">Press <b>Run the tests</b>.</span>';
-    $('#cFb').className='feedback';
+    $('#cFb').className='feedback';L.reset();
   });
-  $('#cRe').addEventListener('click',function(){$('#cEd').value=S3[cur].start;$('#cFb').className='feedback';});
-  $('#cHint').addEventListener('click',function(){say($('#cFb'),'<b>Navigator:</b> '+S3[cur].hint,true);});
+  $('#cRe').addEventListener('click',function(){$('#cEd').value=S3[cur].start;$('#cFb').className='feedback';L.reset();});
+  $('#cHint').addEventListener('click',function(){L.hint();});
+  $('#cSol').addEventListener('click',function(){L.toggleAnswer();});
   $('#cRun').addEventListener('click',function(){
     var s=S3[cur],pass=runCases($('#cEd').value,s.tests,$('#cRes'));
     if(pass===s.tests.length){
       say($('#cFb'),'<b>All '+pass+' pass.</b> Swap driver and navigator and take the next brief.',true);
       markTabDone($('#cSel'),cur);
-    }else say($('#cFb'),'<b>'+pass+' of '+s.tests.length+'.</b> Navigator: read the failing input out loud and walk the driver through what <em>should</em> happen, line by line. Do not touch the keyboard.',false);
+    }else{
+      L.failed();
+      say($('#cFb'),'<b>'+pass+' of '+s.tests.length+'.</b> Navigator: read the failing input out loud and walk the driver through what <em>should</em> happen, line by line. Do not touch the keyboard.'+
+        (L.fails>=3?' If you are properly stuck, <b>Show us the answer</b> is there now.':' <b>Nudge us</b> gives you a hint.'),false);
+    }
   });
 }
 
